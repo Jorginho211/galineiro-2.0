@@ -1,0 +1,1 @@
+Nesta carpeta iran todas as fotos

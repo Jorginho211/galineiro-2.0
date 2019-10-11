@@ -1,0 +1,1 @@
+from .coregalineiro import CoreGalineiro
