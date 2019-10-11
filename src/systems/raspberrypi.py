@@ -54,7 +54,6 @@ class RaspberryPi(SystemBase):
 
     def abrir_porta(self):
         self._cadeado_porta.acquire()
-        self.encender_fuente()
         GPIO.output(self.__motor_sentido2_pin, False)  # Alimentamos Motor (Sentido 2)
         time.sleep(self.__tempo_apertura_peche)
         GPIO.output(self.__motor_sentido2_pin, True)
@@ -63,7 +62,6 @@ class RaspberryPi(SystemBase):
 
     def pechar_porta(self):
         self._cadeado_porta.acquire()
-        self.encender_fuente()
         GPIO.output(self.__motor_comun_pin, False) # Alimentamos - 0 V CC
         time.sleep(1)
         GPIO.output(self.__motor_sentido1_pin, False)  # Alimentamos Motor (Sentido 1)
@@ -86,10 +84,18 @@ class RaspberryPi(SystemBase):
     def apagar_incandescente(self):
         GPIO.output(self.__lampara_pin, True)  # Apagar luz
 
+    def encender_luz_pulsador(self):
+        self.encender_fuente()
+        GPIO.output(self.__luz_pulsador, False)
+
+    def apagar_luz_pulsador(self):
+        self.apagar_fuente()
+        GPIO.output(self.__luz_pulsador, True)
+
     def esta_pulsado(self):
-        if not GPIO.input(20):
+        if not GPIO.input(self.__pulsador):
             time.sleep(0.2)
-            while not GPIO.input(20):
+            while not GPIO.input(self.__pulsador):
                 continue
 
             return True
