@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 
 class RaspberryPi(SystemBase):
     def __init__(self):
-        super.__init__()
+        super().__init__()
 
         self.__lampara_pin = 7              # Lampara Incandescente Cortello
         self.__transformador_24v_pin = 15   # Alimentación Transformado 24 V CC

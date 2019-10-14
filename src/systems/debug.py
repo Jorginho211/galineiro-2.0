@@ -3,6 +3,7 @@ import time
 
 class Debug(SystemBase):
     def __init__(self):
+        super().__init__()
         self.__intervalo_pulsador = None
         self.__intervalo_dia = None
         self.__estado_pulsador = None
@@ -33,10 +34,10 @@ class Debug(SystemBase):
         return self.__estado_dia
 
     def encender_incandescente(self):
-        print("encendido")
+        print("luz encendida")
 
     def apagar_incandescente(self):
-        print("apagado")
+        print("luz apagada")
 
     def encender_luz_pulsador(self):
         print("encendido luz pulsador")
@@ -48,5 +49,6 @@ class Debug(SystemBase):
         if self.__estado_pulsador == None or time.time() >= self.__intervalo_pulsador:
             self.__estado_pulsador = bool(int(input('0 -> Sin pulsar, 1 -> Pulsado: ')))
             self.__intervalo_pulsador = time.time() + 20
+            return self.__estado_pulsador
 
-        return self.__estado_pulsador
+        return False

@@ -112,7 +112,8 @@ class CoreGalineiro:
                     if not cerrouse_porta_automaticamente:
                         self.__luz_ciclo = True
                         self.encender_luz()
-                        time.sleep(1200)
+                        #time.sleep(1200)
+                        time.sleep(10)
                         cerrouse_porta_automaticamente = True
                     self.cerrar_porta()
                     self.apagar_luz()
