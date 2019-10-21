@@ -21,6 +21,29 @@ class CoreGalineiro:
 
         self.root_path = None
 
+    def estado_manual_mobil(self, estado):
+        if self.__pulsador:
+            self.__manual_mobil = False
+            return False
+
+        self.__manual_mobil = estado
+        return True
+
+    def comprobacion_estado_manual_mobil(self):
+        while True:
+            tempo = 0
+            while self.__manual_mobil is False:
+                time.sleep(10)
+
+            while self.__manual_mobil and tempo < 20:
+                time.sleep(1)
+                tempo += 1
+
+            self.__manual_mobil = False
+
+    def parametros(self):
+        return {"porta": self.__porta, "manAuto": self.__manual_mobil, "incandescente": self.__incandescente}
+
     @staticmethod
     def instance():
         if CoreGalineiro.__INSTANCE is None:

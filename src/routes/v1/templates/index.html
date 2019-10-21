@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	 <head>
+	 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Galiñeiro</title>
+		<link rel="shortcut icon" href="{{ url_for('galineiro.static', filename='images/favicon.ico') }}" type="image/x-icon" />
+		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{ url_for('galineiro.static', filename='images/icon.png') }}" />
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ url_for('galineiro.static', filename='images/icon.png') }}" />
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ url_for('galineiro.static', filename='images/icon.png') }}" />
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ url_for('galineiro.static', filename='images/icon.png') }}" />
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ url_for('galineiro.static', filename='images/icon.png') }}" />
+		<meta name="msapplication-TileImage" content="{{ url_for('galineiro.static', filename='images/icon.png') }}" />
+		<meta name="msapplication-TileColor" content="#d83434" />
+
+		<link href="{{ url_for('galineiro.static', filename='estilo.css') }}" rel="stylesheet" type="text/css" media="all" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<script src="{{ url_for('galineiro.static', filename='jquery-3.1.1.min.js') }}"></script>
+		<script src="{{ url_for('galineiro.static', filename='functionsXenericas.js') }}"></script>
+		<script src="{{ url_for('galineiro.static', filename='galineiro.js') }}"></script>
+		<!--<script src="{{ url_for('galineiro.static', filename='videoVixilancia.js') }}"></script>-->
+
+        <!-- <script src="../static/jquery-3.1.1.min.js"></script>
+        <script src="../static/functionsXenericas.js"></script>
+		<script src="../static/galineiro.js"></script>
+		<script src="../static/videoVixilancia.js"></script>
+		<link href="../static/estilo.css" rel="stylesheet" type="text/css" media="all" />-->
+	</head>
+
+	<body onload="actualizar()">
+		<header>
+			<div id="app">
+				<h4 id="nomeApp" onclick="cambiarModo()">Galiñeiro</h4>
+				<div id="incandescente"></div>
+			</div>
+			<button id="btnActualizar" onclick="actualizar()">Actualizar</button>
+			<button id="btnReiniciar" onclick="reiniciar()">Reiniciar</button>
+		</header>
+		<section id="galineiro">
+			<button id="btnAccionManual" onclick="automaticoManual()">Activar Manual</button>
+			<button id="btnAccionPortal" onclick="abrirCerrarPortal()" disabled>Abrir Porta</button>
+			<button id="encenderApagarCamara" onclick="encenderApagarCamara()">Encender Camara</button>
+			<img id="imaxeCamara" src="" alt="Imaxe da Camara do Galiñeiro">
+		</section>
+		<section id="videovixilancia">
+            <button id="btnActivarServicioVixilancia" onclick="activarServicioVideoVixilancia()">Activar Grabación</button>
+			<button id="btnVerCamaraVixilancia" onclick="encenderApagarCamaraVideoVixilancia()">Ver Camara</button>
+			<img id="imaxeCamaraVixilancia" src="" alt="Imaxe da Camara de videovixilancia">
+		</section>
+		<section id="informacion">
+			<p id="msg">Erro de comunicación!</p>
+		</section>
+	</body>
+</html>
