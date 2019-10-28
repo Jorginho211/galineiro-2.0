@@ -1,0 +1,1 @@
+Nesta carpeta iran os certificados SSL da aplicación

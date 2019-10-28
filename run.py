@@ -10,4 +10,4 @@ if __name__ == '__main__':
 
     ciclo_thread_mobil = threading.Thread(target=CoreGalineiro.instance().comprobacion_estado_manual_mobil)
     ciclo_thread_mobil.start()
-    app.run(threaded=True)
+    app.run(threaded=True, ssl_context=('certs/galineiro.crt', 'certs/galineiro.key'))

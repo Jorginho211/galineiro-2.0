@@ -96,3 +96,5 @@ ENV/
 
 .idea/
 media/*.jpg
+certs/*.crt
+certs/*.key
