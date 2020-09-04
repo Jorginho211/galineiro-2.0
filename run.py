@@ -15,4 +15,6 @@ if __name__ == '__main__':
     ciclo_thread_mobil = threading.Thread(
         target=CoreGalineiro.instance().comprobacion_estado_manual_mobil)
     ciclo_thread_mobil.start()
-    app.run(threaded=True, use_reloader=False)
+
+    app.run(host=app.config['HOST'], port=app.config['PORT'],
+            threaded=True, use_reloader=False)
