@@ -125,6 +125,7 @@ class CoreGalineiro:
     def ciclo(self):
         self.cerrar_porta()
         cerrouse_porta_automaticamente = True   # Cando e de noite a porta cerrase despois de pasar o tempo un unica vez
+        luz_tempo_encendida = int(os.getenv("GALINEIRO_LUZ_MAX_TIME") or 1200)
 
         while True:
             if self.__system.esta_pulsado():
@@ -144,7 +145,7 @@ class CoreGalineiro:
                     if not cerrouse_porta_automaticamente:
                         self.__luz_ciclo = True
                         self.encender_luz()
-                        time.sleep(int(os.getenv("GALINEIRO_LUZ_MAX_TIME")))
+                        time.sleep(luz_tempo_encendida)
                         cerrouse_porta_automaticamente = True
                     self.cerrar_porta()
                     self.apagar_luz()
