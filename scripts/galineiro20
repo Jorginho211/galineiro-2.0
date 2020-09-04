@@ -1,0 +1,49 @@
+#!/bin/bash
+# /etc/init.d/galineiro20.sh
+
+### BEGIN INIT INFO
+# Provides:             galiñeiro
+# Required-Start:       $remote_fs $syslog
+# Required-Stop:        $remote_fs $syslog
+# Default-Start:        1 2 3 4 5
+# Default-Stop:         0 1 6
+# Short-Description:    Galiñeiro init script
+# Description:          Este servicio fai funcionar o sistema domotico Galiñeiro
+### END INIT INFO
+
+ruta=/home/pi/Documents/Galineiro-2.0
+programa=run.py
+
+start(){
+    echo "Iniciando Galiñeiro 2.0"
+    source ${ruta}/env/bin/activate
+    python3.7 ${ruta}/${programa} &
+    echo $! > ${ruta}/galineiro20.pid
+}
+
+stop() {
+    echo "Parando Galiñeiro 2.0"
+    kill -9 $(cat ${ruta}/galineiro20.pid)
+    rm ${ruta}/galineiro20.pid
+}
+
+restart() {
+    stop
+    sleep 5
+    start
+}
+
+case "$1" in
+start)
+        start
+        ;;
+stop)
+        stop
+        ;;
+restart)
+        restart
+        ;;
+*)
+    echo "Usar: $0 {start|stop|restart}"
+    exit 1
+esac
