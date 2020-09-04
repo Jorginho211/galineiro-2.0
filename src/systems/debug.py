@@ -1,6 +1,7 @@
 from .base import SystemBase
 import time
 
+
 class Debug(SystemBase):
     def __init__(self):
         super().__init__()
@@ -8,7 +9,6 @@ class Debug(SystemBase):
         self.__intervalo_dia = None
         self.__estado_pulsador = None
         self.__estado_dia = None
-
 
     def encender_fuente(self):
         print("fuente encendida")
@@ -27,9 +27,9 @@ class Debug(SystemBase):
         self._cadeado_porta.release()
 
     def e_dia(self):
-        if self.__estado_dia == None or time.time() >= self.__intervalo_dia:
+        if self.__estado_dia is None or time.time() >= self.__intervalo_dia:
             self.__estado_dia = bool(int(input('0 -> Noite, 1 -> Dia: ')))
-            self.__intervalo_dia = time.time() + 20
+            self.__intervalo_dia = time.time() + 120
 
         return self.__estado_dia
 
@@ -46,9 +46,10 @@ class Debug(SystemBase):
         print("apagado luz pulsador")
 
     def esta_pulsado(self):
-        if self.__estado_pulsador == None or time.time() >= self.__intervalo_pulsador:
+        if (self.__estado_pulsador is None or
+                time.time() >= self.__intervalo_pulsador):
             self.__estado_pulsador = bool(int(input('0 -> Sin pulsar, 1 -> Pulsado: ')))
-            self.__intervalo_pulsador = time.time() + 20
+            self.__intervalo_pulsador = time.time() + 120
             return self.__estado_pulsador
 
         return False
