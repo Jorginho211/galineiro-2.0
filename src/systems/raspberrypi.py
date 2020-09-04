@@ -93,11 +93,14 @@ class RaspberryPi(SystemBase):
         GPIO.output(self.__luz_pulsador, True)
 
     def esta_pulsado(self):
+        ret = False
+
         if not GPIO.input(self.__pulsador):
             time.sleep(0.2)
+            if not GPIO.input(self.__pulsador):
+                ret = True
+
             while not GPIO.input(self.__pulsador):
                 continue
 
-            return True
-
-        return False
+        return ret
