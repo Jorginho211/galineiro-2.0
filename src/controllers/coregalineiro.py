@@ -35,19 +35,23 @@ class CoreGalineiro:
         return True
 
     def comprobacion_estado_manual_mobil(self):
+        tempo_maximo = int(os.getenv('GALINEIRO_MAN_AUTO_MAX_TIME') or "600")
+
         while True:
             tempo = 0
             while self.__manual_mobil is False:
                 time.sleep(10)
 
-            while self.__manual_mobil and tempo < 20:
+            while self.__manual_mobil and tempo < tempo_maximo:
                 time.sleep(1)
                 tempo += 1
 
             self.__manual_mobil = False
 
     def parametros(self):
-        return {"porta": self.__porta, "manAuto": self.__manual_mobil, "incandescente": self.__incandescente}
+        return {"porta": self.__porta,
+                "manAuto": self.__manual_mobil,
+                "incandescente": self.__incandescente}
 
     @staticmethod
     def instance():
