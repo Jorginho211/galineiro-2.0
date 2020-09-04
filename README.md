@@ -1,8 +1,11 @@
 # Galineiro-2.0
 
 ## Requisitos
+Paquetes que deben estar instalados dentro do sistema:
+
 * Python 3
 * Pip
+* fswebcam
 
 ## Creación do entorno e instalación de dependencias
 
