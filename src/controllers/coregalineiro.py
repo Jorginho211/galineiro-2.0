@@ -1,8 +1,8 @@
 from threading import Lock
-from ..systems import Debug
 import subprocess
 import time
 import base64
+import os
 
 
 class CoreGalineiro:
@@ -17,7 +17,12 @@ class CoreGalineiro:
         self.__cerre_manual = False  # Evitar a espera de 20 minutos se xa foi feita no peche
         self.__candado_camara = Lock()  # SEMAFORO
 
-        self.__system = Debug()
+        if os.getenv("SYSTEM_ENV") == "raspberrypi":
+            from src.systems.raspberrypi import RaspberryPi
+            self.__system = RaspberryPi()
+        else:
+            from src.systems.debug import Debug
+            self.__system = Debug()
 
         self.root_path = None
 
