@@ -140,17 +140,16 @@ class CoreGalineiro:
                     self.__pulsador = False
 
             if not self.__pulsador and not self.__manual_mobil:
-                if not self.__system.e_dia():
+                if not self.__system.e_dia() and self.__porta:
                     if not cerrouse_porta_automaticamente:
                         self.__luz_ciclo = True
                         self.encender_luz()
-                        #time.sleep(1200)
-                        time.sleep(10)
+                        time.sleep(int(os.getenv("GALINEIRO_LUZ_MAX_TIME")))
                         cerrouse_porta_automaticamente = True
                     self.cerrar_porta()
                     self.apagar_luz()
                     self.__luz_ciclo = False
 
-                else:
+                elif not self.__porta:
                     self.abrir_porta()
                     cerrouse_porta_automaticamente = False
