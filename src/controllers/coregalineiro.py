@@ -147,9 +147,9 @@ class CoreGalineiro:
                         self.encender_luz()
                         time.sleep(luz_tempo_encendida)
                         cerrouse_porta_automaticamente = True
+                    self.__luz_ciclo = False
                     self.cerrar_porta()
                     self.apagar_luz()
-                    self.__luz_ciclo = False
 
                 elif self.__system.e_dia() and not self.__porta:
                     self.abrir_porta()
