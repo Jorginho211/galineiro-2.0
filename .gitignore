@@ -98,3 +98,4 @@ ENV/
 media/*.jpg
 certs/*.crt
 certs/*.key
+.vagrant/
