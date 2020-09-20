@@ -11,25 +11,23 @@
 # Description:          Este servicio fai funcionar o sistema domotico Galiñeiro
 ### END INIT INFO
 
-ruta=/home/pi/Documents/Galineiro-2.0
-programa=run.py
+ruta=/home/pi/Documents/Galineiro-2.0/
 
 start(){
     echo "Iniciando Galiñeiro 2.0"
-    source ${ruta}/env/bin/activate
-    python3.7 ${ruta}/${programa} &
-    echo $! > ${ruta}/galineiro20.pid
+    cd ${ruta}
+    make start
 }
 
 stop() {
     echo "Parando Galiñeiro 2.0"
-    kill -9 $(cat ${ruta}/galineiro20.pid)
-    rm ${ruta}/galineiro20.pid
+    cd ${ruta}
+    make stop
 }
 
 restart() {
     stop
-    sleep 5
+    sleep 20
     start
 }
 
