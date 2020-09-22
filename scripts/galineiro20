@@ -12,17 +12,22 @@
 ### END INIT INFO
 
 ruta=/home/pi/Documents/Galineiro-2.0/
+url="http://127.0.0.1:5001"
+user=pi
 
 start(){
     echo "Iniciando Galiñeiro 2.0"
-    cd ${ruta}
-    make start
+    su - ${user} -c "cd ${ruta} && make start"
+    until curl ${url}
+    do
+        sleep 1
+    done
+    nginx -s reload
 }
 
 stop() {
     echo "Parando Galiñeiro 2.0"
-    cd ${ruta}
-    make stop
+    su - ${user} -c "cd ${ruta} && make stop"
 }
 
 restart() {
