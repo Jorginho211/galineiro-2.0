@@ -11,13 +11,13 @@ class RaspberryPi(SystemBase):
         self.__motor_comun_pin = 18         # - 0 V CC Motor Puerta
         self.__motor_sentido1_pin = 23      # + 24 V CC Motor Puerta (SEMTIDO 1)
         self.__motor_sentido2_pin = 24      # + 24 V CC Motor Puerta (Sentido 2)
-        self.__luz_pulsador = 25            # Luz Pulsador MAN/AUTO
+        self.__luz_pulsador_pin = 25        # Luz Pulsador MAN/AUTO
 
-        self.__pulsador = 20
-        self.__noite = 16
-        self.__dia = 12
+        self.__pulsador_pin = 20            # Entrada de pulsador
+        self.__noite_pin = 16               # Entrada para indicar se e noite
+        self.__dia_pin = 12                 # Entrada para indicar se e dia
 
-        self.__tempo_apertura_peche = 22
+        self.__tempo_apertura_peche = 22    # Duracion da maniobra da porta
 
         self.__inicializar_pins__()
 
@@ -37,13 +37,13 @@ class RaspberryPi(SystemBase):
         GPIO.output(self.__motor_sentido1_pin, True)
         GPIO.setup(self.__motor_sentido2_pin, GPIO.OUT)
         GPIO.output(self.__motor_sentido2_pin, True)
-        GPIO.setup(self.__luz_pulsador, GPIO.OUT)
-        GPIO.output(self.__luz_pulsador, True)
+        GPIO.setup(self.__luz_pulsador_pin, GPIO.OUT)
+        GPIO.output(self.__luz_pulsador_pin, True)
 
         # Configuracion entradas
-        GPIO.setup(self.__pulsador, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Pulsador
-        GPIO.setup(self.__noite, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Noche
-        GPIO.setup(self.__dia, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Dia
+        GPIO.setup(self.__pulsador_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Pulsador
+        GPIO.setup(self.__noite_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Noche
+        GPIO.setup(self.__dia_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Dia
 
     def encender_fuente(self):
         GPIO.output(self.__transformador_24v_pin, False)  # Encendemos Fuente
@@ -73,9 +73,9 @@ class RaspberryPi(SystemBase):
         self._cadeado_porta.release()
 
     def e_dia(self):
-        if not GPIO.input(self.__noite):
+        if not GPIO.input(self.__noite_pin):
             return False
-        elif not GPIO.input(self.__dia):
+        elif not GPIO.input(self.__dia_pin):
             return True
 
     def encender_incandescente(self):
@@ -86,21 +86,21 @@ class RaspberryPi(SystemBase):
 
     def encender_luz_pulsador(self):
         self.encender_fuente()
-        GPIO.output(self.__luz_pulsador, False)
+        GPIO.output(self.__luz_pulsador_pin, False)
 
     def apagar_luz_pulsador(self):
         self.apagar_fuente()
-        GPIO.output(self.__luz_pulsador, True)
+        GPIO.output(self.__luz_pulsador_pin, True)
 
     def esta_pulsado(self):
         ret = False
 
-        if not GPIO.input(self.__pulsador):
+        if not GPIO.input(self.__pulsador_pin):
             time.sleep(0.2)
-            if not GPIO.input(self.__pulsador):
+            if not GPIO.input(self.__pulsador_pin):
                 ret = True
 
-            while not GPIO.input(self.__pulsador):
+            while not GPIO.input(self.__pulsador_pin):
                 continue
 
         return ret
