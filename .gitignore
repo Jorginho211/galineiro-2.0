@@ -87,6 +87,7 @@ celerybeat-schedule
 .venv
 venv/
 ENV/
+*.pid
 
 # Spyder project settings
 .spyderproject
